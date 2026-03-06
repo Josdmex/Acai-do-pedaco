@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Açaí Space | O Melhor da Galáxia</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;700;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="acaidopedaco_logo.png" alt="Logo Açaí Space" class="logo-img">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#cardapio">Cardápio</a></li>
+                <li><a href="#como-funciona">Como Pedir</a></li>
+            </ul>
+            <div class="cart-icon-nav" onclick="abrirModalCarrinho()">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="contador-itens-nav" class="badge-qty">0</span>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero-tiktok">
+        
+        <img src="img/morango-fundo.png" class="floating-item f1" alt="">
+        <img src="img/morango-fundo.png" class="floating-item f2" alt="">
+
+        <div class="hero-container">
+            
+            <div class="hero-text-content">
+                <h1>
+                    <span class="texto-amarelo">JÁ<br>TOMOU</span>
+                    <span class="texto-branco">SEU AÇAÍ HOJE?</span>
+                </h1>
+            </div>
+
+            <div class="hero-image-content">
+                <img src="img/banner-hero.png" class="img-principal" alt="Copos de Açaí com Splash">
+            </div>
+
+        </div>
+    </section>
+
+    <section id="cardapio" class="menu-section">
+        <div class="section-header">
+            <h3>Nossas Delícias</h3>
+            <h2>Escolha seu favorito</h2>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder=" " autocomplete="off">
+            <i class="fas fa-search search-icon"></i>
+            <span class="search-placeholder">Buscar açaí, roleta, barca...</span>
+        </div>
+
+        <div class="favoritos-header">
+            <h3><i class="fas fa-fire" style="color: #ff4500;"></i> Os Mais Pedidos</h3>
+        </div>
+        
+        <div class="carousel-container drag-container" id="carouselFavoritos">
+            
+            <div class="favorito-card" data-tipo="personalizar" data-nome="Copo Turbinado 500ml" data-preco="22.00" data-img="copo500ml.jpg" onclick="virarCard(this, event)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="fav-badge"><i class="fas fa-fire"></i> O favorito!</div>
+                        <img src="copo500ml.jpg" alt="Açaí do Cruzeiro">
+                        <h4>Copo Turbinado 500ml</h4>
+                        <span class="fav-price">A partir de<br><strong>R$ 22,00</strong></span>
+                    </div>
+                    <div class="card-back">
+                        <h4>Turbinado 500ml</h4>
+                        <p>Açaí cremoso, Leite Ninho, Morango fresco e muito +.</p>
+                        <button class="btn-add-fav" onclick="acionarProduto(event, this)">
+                            Personalizar <i class="fas fa-magic"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="favorito-card" data-tipo="direto" data-nome="Barca Galáxia 1L" data-preco="45.00" data-img="barcacai.jpg" onclick="virarCard(this, event)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="fav-badge"><i class="fas fa-star"></i> Top Vendas</div>
+                        <img src="barcacai.jpg" alt="Barca Promocional">
+                        <h4>Barca Galáxia 1L</h4>
+                        <span class="fav-price">A partir de<br><strong>R$ 45,00</strong></span>
+                    </div>
+                    <div class="card-back">
+                        <h4>Barca Galáxia 1L</h4>
+                        <p>Para a galera! Açaí puro + 5 adicionais + 2 frutas.</p>
+                        <button class="btn-add-fav" onclick="acionarProduto(event, this)">
+                            Pedir Agora <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="favorito-card" data-tipo="direto" data-nome="Shake Cremoso" data-preco="18.00" data-img="shakecremoso.jpg" onclick="virarCard(this, event)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="fav-badge"><i class="fas fa-snowflake"></i> Refrescante</div>
+                        <img src="shakecremoso.jpg" alt="Shake">
+                        <h4>Shake Cremoso</h4>
+                        <span class="fav-price">A partir de<br><strong>R$ 18,00</strong></span>
+                    </div>
+                    <div class="card-back">
+                        <h4>Shake Cremoso</h4>
+                        <p>Batido com leite condensado e banana. Super gelado!</p>
+                        <button class="btn-add-fav" onclick="acionarProduto(event, this)">
+                            Pedir Agora <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="menu-tabs" style="margin-top: 30px;">
+            <button class="tab-btn active" onclick="filtrarMenu('todos', this)">Todos</button>
+            <button class="tab-btn" onclick="filtrarMenu('copos', this)">Copos</button>
+            <button class="tab-btn" onclick="filtrarMenu('barcas', this)">Barcas</button>
+            <button class="tab-btn" onclick="filtrarMenu('shakes', this)">Shakes</button>
+        </div>
+
+        <div class="menu-grid">
+            
+            <div class="product-card" data-categoria="copos">
+                <div class="product-img-container">
+                    <img src="copo500ml.jpg" alt="Copo 500ml">
+                    <span class="discount-badge">-10% OFF</span>
+                </div>
+                <div class="product-info">
+                    <h3>Copo Turbinado 500ml</h3>
+                    <p class="description">Açaí cremoso, Leite Ninho, Morango fresco e muito +.</p>
+                    <div class="card-bottom">
+                        <span class="price">R$ 22,00</span>
+                        <button class="btn-pill" onclick="abrirPersonalizacao('Copo Turbinado 500ml', 22.00, 'copo500ml.jpg')">
+                            Adicionar <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-categoria="barcas">
+                <div class="product-img-container">
+                    <img src="barcacai.jpg" alt="Barca 1 Litro">
+                </div>
+                <div class="product-info">
+                    <h3>Barca Galáxia (1L)</h3>
+                    <p class="description">Para a galera! Açaí puro + 5 adicionais + 2 frutas.</p>
+                    <div class="card-bottom">
+                        <span class="price">R$ 45,00</span>
+                        <button class="btn-pill" onclick="adicionarAoCarrinho('Barca 1L', 45.00)">
+                            Adicionar <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-categoria="copos">
+                <div class="product-img-container">
+                    <img src="copo300ml.jpg" alt="Copo 300ml">
+                </div>
+                <div class="product-info">
+                    <h3>Copo Simples 300ml</h3>
+                    <p class="description">Lanche rápido. Açaí + Banana + 2 adicionais básicos.</p>
+                    <div class="card-bottom">
+                        <span class="price">R$ 15,00</span>
+                        <button class="btn-pill" onclick="adicionarAoCarrinho('Copo 300ml', 15.00)">
+                            Adicionar <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card" data-categoria="shakes">
+                <div class="product-img-container">
+                    <img src="shakecremoso.jpg" alt="Milkshake">
+                </div>
+                <div class="product-info">
+                    <h3>Shake Cremoso</h3>
+                    <p class="description">Batido com leite condensado e banana. Refrescante!</p>
+                    <div class="card-bottom">
+                        <span class="price">R$ 18,00</span>
+                        <button class="btn-pill" onclick="adicionarAoCarrinho('Shake Açaí', 18.00)">
+                            Adicionar <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="como-funciona" class="steps-section">
+        <div class="section-header">
+            <h3>Simples e Rápido</h3>
+            <h2>Como fazer seu pedido</h2>
+        </div>
+        <div class="steps-grid">
+            
+            <div class="step-card">
+                <div class="step-icon"><i class="fas fa-mouse-pointer"></i></div>
+                <h3>1. Escolha a Base</h3>
+                <p>Navegue pelo nosso cardápio e escolha o tamanho ideal da sua fome: Copo, Barca ou Shake.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-icon"><i class="fas fa-layer-group"></i></div>
+                <h3>2. Monte do Seu Jeito</h3>
+                <p>Use nosso montador visual para adicionar frutas, cremes e crocantes camada por camada.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-icon"><i class="fab fa-whatsapp"></i></div>
+                <h3>3. Envie no Zap</h3>
+                <p>Finalize na sacola. Seu pedido chega pra gente todo somado e organizadinho no WhatsApp!</p>
+            </div>
+            
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-ice-cream"></i> Açaí<span> do Pedaço</span>
+                <p>Felicidade em cada colherada.</p>
+                <div class="developer-credit">
+                    <p>Desenvolvido por <a href="https://instagram.com/uppzen" target="_blank"><i class="fab fa-instagram"></i> Uppzen 🛸</a></p>
+                </div>
+            </div>
+            <div class="footer-social">
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="barra-carrinho" class="cart-floating-bar" onclick="abrirModalCarrinho()">
+        <div class="cart-left">
+            <i class="fas fa-shopping-bag"></i>
+            <span id="contador-itens" class="badge-qty">0</span>
+        </div>
+        <div class="cart-center">Ver Sacola</div>
+        <div class="cart-right">
+            <span id="valor-total">R$ 0,00</span>
+        </div>
+    </div>
+
+    <div id="modal-checkout" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Sua Sacola <img src="caminho/para/sua/imagem.png" alt="Coração Açaí" class="coracao-titulo"></h3>
+                <button class="btn-close" onclick="fecharModalCarrinho()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="lista-itens" class="cart-items-list"></div>
+                <div class="cart-summary">
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="total-modal">R$ 0,00</span>
+                    </div>
+                </div>
+                <div class="form-checkout">
+                    <h4>Onde entregamos?</h4>
+                    <div class="input-group"><i class="fas fa-user"></i><input type="text" id="nome-cliente" placeholder="Seu nome"></div>
+                    <div class="input-group"><i class="fas fa-map-marker-alt"></i><input type="text" id="endereco-cliente" placeholder="Endereço completo"></div>
+                    <div class="input-group"><i class="fas fa-money-bill-wave"></i>
+                        <select id="pagamento-cliente">
+                            <option value="" disabled selected>Forma de Pagamento</option>
+                            <option value="Pix">Pix</option>
+                            <option value="Cartão">Cartão</option>
+                            <option value="Dinheiro">Dinheiro</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-finalizar-zap" onclick="enviarPedidoZap()">Finalizar Pedido <i class="fab fa-whatsapp"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-personalizar" class="modal-overlay">
+    <div class="modal-container modal-builder">
+        
+        <div class="modal-header">
+            <h3>Monte do seu jeito <i class="fas fa-layer-group" style="color: var(--accent-orange); font-size: 1.1rem; margin-left: 5px;"></i></h3>
+            <button class="btn-close" onclick="fecharPersonalizacao()"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div class="builder-grid">
+            
+            <div class="builder-visual">
+                <div class="foto-real-preview">
+                    <img id="builder-foto-real" src="copo500ml.jpg" alt="Produto Real">
+                    <span class="badge-builder">Base Selecionada</span>
+                </div>
+
+                <div class="copo-magico-container">
+                    <div class="copo-palco">
+                        <img src="img/copoacai.png" class="camada base" alt="Copo">
+
+                        <img src="img/leiteninho.png" class="camada ingrediente" id="layer-leitepo" style="z-index: 11;">
+                        <img src="img/granola.png" class="camada ingrediente" id="layer-granola" style="z-index: 12;">
+                        <img src="img/leitecondensado.png" class="camada ingrediente" id="layer-leitecondensado" style="z-index: 10;">
+                        <img src="img/banana1.png" class="camada ingrediente" id="layer-banana-1" style="z-index: 9;">
+                        <img src="img/morango1.png" class="camada ingrediente" id="layer-morango-1" style="z-index: 8;">
+                        <img src="img/morango2.png" class="camada ingrediente" id="layer-morango-2" style="z-index: 14;">
+                        <img src="img/banana2.png" class="camada ingrediente" id="layer-banana-2" style="z-index: 13;">
+                    </div>
+                    <p class="legenda-builder">Visualização ilustrativa</p>
+                </div>
+            </div>
+
+            <div class="builder-options">
+                <div class="builder-info">
+                    <h2 id="builder-titulo">Copo 500ml</h2>
+                    <p>Escolha seus adicionais grátis ou turbinados:</p>
+                </div>
+
+                <div class="opcoes-lista">
+                    <label class="opcao-card" onclick="toggleCamada('layer-leitepo')">
+                        <input type="checkbox" name="adicional" value="Leite em Pó" data-preco="0">
+                        <div class="opcao-info">
+                            <span class="nome">Leite em Pó</span>
+                            <span class="preco-add">Grátis</span>
+                        </div>
+                        <i class="fas fa-check-circle check-icon"></i>
+                    </label>
+
+                    <label class="opcao-card" onclick="toggleCamada('layer-granola')">
+                        <input type="checkbox" name="adicional" value="Granola" data-preco="0">
+                        <div class="opcao-info">
+                            <span class="nome">Granola Crocante</span>
+                            <span class="preco-add">Grátis</span>
+                        </div>
+                        <i class="fas fa-check-circle check-icon"></i>
+                    </label>
+
+                    <label class="opcao-card" onclick="toggleCamada('layer-leitecondensado')">
+                        <input type="checkbox" name="adicional" value="Leite Condensado" data-preco="2.00">
+                        <div class="opcao-info">
+                            <span class="nome">Leite Condensado</span>
+                            <span class="preco-add">+ R$ 2,00</span>
+                        </div>
+                        <i class="fas fa-check-circle check-icon"></i>
+                    </label>
+
+                    <label class="opcao-card" onclick="toggleCamada('layer-banana')">
+                        <input type="checkbox" name="adicional" value="Banana" data-preco="0">
+                        <div class="opcao-info">
+                            <span class="nome">Banana</span>
+                            <span class="preco-add">Grátis</span>
+                        </div>
+                        <i class="fas fa-check-circle check-icon"></i>
+                    </label>
+
+                    <label class="opcao-card" onclick="toggleCamada('layer-morango')">
+                        <input type="checkbox" name="adicional" value="Morango" data-preco="3.00">
+                        <div class="opcao-info">
+                            <span class="nome">Morango</span>
+                            <span class="preco-add">+ R$ 3,00</span>
+                        </div>
+                        <i class="fas fa-check-circle check-icon"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer builder-footer">
+            <div class="price-box">
+                <span>Total:</span>
+                <span id="builder-total" class="price-big">R$ 0,00</span>
+            </div>
+            <button class="btn-finalizar-zap" onclick="confirmarPersonalizacao()">
+                Adicionar à Sacola <i class="fas fa-check"></i>
+            </button>
+        </div>
+    </div>
+    </div>
+
+    <script src="script.js" charset="UTF-8"></script>
+</body>
+</html>

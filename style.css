@@ -1,0 +1,939 @@
+/* =========================================
+   1. RESET E VARIÁVEIS (BASE)
+   ========================================= */
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+}
+
+:root {
+    /* Cores Premium e Vibrantes */
+    --primary-purple: #4A148C; /* Roxo Principal */
+    --deep-purple: #2a0a55;    /* Roxo Escuro (Texto) */
+    --accent-orange: #FF6F00;  /* Laranja Detalhes */
+    --accent-pink: #ff0080;    /* Rosa (Detalhes Frooty) */
+    --action-green: #00C853;   /* Verde WhatsApp */
+    --bg-light: #FDFBFD;       /* Fundo quase branco */
+    --white: #FFFFFF;
+    
+    /* Variáveis de Design */
+    --radius-card: 30px;       /* Curva das fotos */
+    --radius-pill: 50px;       /* Botões redondos */
+    --shadow-float: 0 10px 30px rgba(0, 200, 83, 0.4);
+}
+
+html { scroll-behavior: smooth; }
+body { 
+    background-color: var(--bg-light); 
+    color: var(--deep-purple); 
+    padding-bottom: 100px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+}
+
+a { text-decoration: none; }
+ul { list-style: none; }
+
+/* =========================================
+   2. NAVBAR (CABEÇALHO)
+   ========================================= */
+header {
+    /* Fundo sólido na cor mais escura do banner (e sem as frutinhas!) */
+    background: radial-gradient(circle at 30% 50%, #751040 0%, #4a0828 100%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.048); /* Sombra um pouquinho mais forte */
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    height: 80px;
+    border-radius: 0 0 20px 20px; /* Reduzi um pouco a curva pra ficar mais alinhado com o visual em bloco */
+}
+
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1200px; margin: 0 auto; padding: 0 5%; height: 100%;
+}
+
+/* Container da logo */
+.logo {
+    display: flex;
+    align-items: center;
+    /* Se precisar empurrar um pouco pra baixo ou pra cima, use margin-top aqui */
+}
+
+/* A imagem da logo em si */
+.logo-img {
+    height: 80px; /* Define a altura máxima pra caber na navbar de 80px */
+    width: auto; /* Mantém a proporção correta da imagem */
+    transition: 0.3s;
+}
+
+.logo-img:hover {
+    transform: scale(1.05); /* Um charminho ao passar o mouse */
+}
+
+.nav-links { display: flex; gap: 25px; align-items: center; }
+.nav-links a { color: #FFFFFF; font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
+.nav-links a:hover { color: #FFC107; } /* Fica amarelo ao passar o mouse */
+
+.btn-nav-destaque {
+    background-color: #FFC107 !important; /* Amarelo Ouro */
+    color: #4a0828 !important; /* Letra Vinho */
+    padding: 10px 25px; 
+    border-radius: var(--radius-pill);
+    font-weight: 900;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.btn-nav-destaque:hover { 
+    background-color: #fff !important; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* Ícone Carrinho Navbar */
+.cart-icon-nav { position: relative; cursor: pointer; font-size: 1.3rem; color: #FFFFFF; margin-left: 20px; transition: 0.2s; }
+.cart-icon-nav:hover { transform: scale(1.1); color: #FFC107; }
+.badge-qty {
+    position: absolute; top: -8px; right: -10px;
+    background-color: var(--accent-pink); color: white;
+    font-size: 0.7rem; width: 18px; height: 18px; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center; font-weight: bold;
+}
+
+/* =========================================
+   3. HERO SECTION (ESTILO TIKTOK / VINHO)
+   ========================================= */
+.hero-tiktok {
+    background: radial-gradient(circle at 30% 50%, #751040 0%, #4a0828 100%);
+    /* Reduzi o padding inferior porque tiramos a onda */
+    padding: 140px 5% 60px; 
+    position: relative;
+    height: 85vh; /* Altura FIXA. Se quiser maior ou menor, mude esse número */
+    overflow: hidden; /* O que for maior que 85vh será cortado */
+    display: flex;
+    align-items: center;
+}
+
+/* --- TEXTURA DE FUNDO (MARCA D'ÁGUA) --- */
+.hero-tiktok::before {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    
+    /* AQUI ENTRA A IMAGEM DO SEU PADRÃO */
+    background-image: url('img/fruit-a.webp'); 
+    background-size: 350px; /* Tamanho do desenho, pode aumentar ou diminuir */
+    background-repeat: repeat; /* Faz a imagem se multiplicar igual azulejo */
+    
+    /* O SEGREDO DO TOM SOBRE TOM TÁ AQUI */
+    opacity: 0.02; /* Deixa 95% transparente! Só aparece o vulto do desenho */
+    z-index: 0; /* Joga lá pro fundo */
+    pointer-events: none; /* Pra não atrapalhar o clique em nada */
+}
+
+.hero-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* --- TIPOGRAFIA --- */
+.hero-text-content {
+    flex: 1;
+    max-width: 500px;
+    margin-left: 50px; /* <--- AQUI: Empurrando pra direita! */
+}
+
+.hero-text-content h1 {
+    font-family: 'Fira Sans', sans-serif !important;
+    font-weight: 400; /* A Lilita já é super gorda por natureza, não precisa do 900 */
+    line-height: 0.98; 
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: -30px; 
+}
+
+/* Engrossando na marra o texto amarelo */
+.texto-amarelo {
+    color: #FFC107; 
+    font-size: 5.5rem; /* Aumentei um tiquinho o tamanho base */
+    font-weight: 900;
+    
+    /* O SEGREDO PRA DEIXAR A FONTE GORDA E IMPACTANTE */
+    -webkit-text-stroke: 2px #FFC107; 
+    
+    text-shadow: 6px 6px 0px #38021c; /* Sombra um pouquinho maior pra acompanhar a grossura */
+    letter-spacing: 6.5px;
+}
+
+/* O "SEU AÇAÍ HOJE?" Branco */
+.texto-branco {
+    color: #FFFFFF;
+    font-size: 1.8rem;
+    font-weight: 900; /* Forçando peso máximo */
+    -webkit-text-stroke: 1px #FFFFFF; /* Engrossando um pouco o branco tbm */
+    letter-spacing: 4px;
+}
+
+.btn-pedir-agora {
+    display: inline-block;
+    margin-top: 30px;
+    background-color: #FFC107;
+    color: #4a0828;
+    padding: 15px 35px; /* Deixei o botão levemente mais gordinho */
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+.btn-pedir-agora:hover {
+    transform: scale(1.05);
+    background-color: #fff;
+}
+
+/* --- IMAGEM (Os 3 Copos) --- */
+.hero-image-content {
+    flex: 1.2; 
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.img-principal {
+    width: 130%; 
+    max-width: 750px;
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+}
+
+@keyframes flutuar {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+}
+
+/* --- DETALHES DE FUNDO (Morangos voando) --- */
+.floating-item {
+    position: absolute;
+    z-index: 1;
+    opacity: 0.6;
+    filter: blur(2px);
+}
+.f1 { top: 20%; left: -5%; width: 100px; transform: rotate(15deg); }
+.f2 { bottom: 30%; right: 40%; width: 80px; transform: rotate(-20deg); }
+
+
+/* =========================================
+   4. MENU / CARDÁPIO (FROOTY BORDERLESS)
+   ========================================= */
+.menu-section { padding: 60px 5% 100px; max-width: 1200px; margin: 0 auto; }
+
+.section-header { text-align: center; margin-bottom: 50px; }
+.section-header h3 { color: var(--accent-orange); text-transform: uppercase; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; }
+.section-header h2 { color: var(--deep-purple); font-size: 2.5rem; }
+
+/* =========================================
+   CARROSSEL ARRASTÁVEL E CARDS 3D (UPZEN)
+   ========================================= */
+.favoritos-header { margin: 20px 0 15px; display: flex; align-items: center; justify-content: space-between; }
+.favoritos-header h3 { font-size: 1.2rem; color: var(--deep-purple); font-weight: 800; }
+
+.drag-container {
+    display: flex; gap: 15px; width: 100%; overflow-x: auto;
+    padding-bottom: 20px; padding-top: 10px; /* Margem pra caber o glow da borda */
+    -ms-overflow-style: none; scrollbar-width: none;
+    cursor: grab;
+}
+.drag-container::-webkit-scrollbar { display: none; }
+.drag-container:active { cursor: grabbing; }
+
+.favorito-card {
+    width: 170px; height: 260px; /* Altura fixa é obrigatória para cards 3D */
+    flex-shrink: 0;
+    perspective: 1000px; /* Habilita a profundidade 3D */
+}
+
+/* O envelope que segura a frente e o verso */
+.card-inner {
+    position: relative; width: 100%; height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d; /* Mantém os filhos em 3D */
+    border-radius: 20px;
+}
+
+/* O QUE ACONTECE QUANDO O CARD É CLICADO E VIRA */
+.favorito-card.flipped .card-inner {
+    transform: rotateY(180deg);
+    box-shadow: 0 0 20px rgba(255, 111, 0, 0.4); /* O Glow Laranja em volta */
+}
+
+/* Design da Frente e do Verso */
+.card-front, .card-back {
+    position: absolute; width: 100%; height: 100%;
+    backface-visibility: hidden; /* Esconde a parte de trás quando virado */
+    background: #fff; border-radius: 20px;
+    border: 2px solid #f0f0f0; display: flex; flex-direction: column;
+}
+
+/* FRENTE */
+.card-front { padding: 10px; }
+.fav-badge { position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.95); color: #ff4500; font-size: 0.7rem; font-weight: 800; padding: 4px 8px; border-radius: 12px; z-index: 2; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+.card-front img { width: 100%; height: 130px; object-fit: cover; border-radius: 15px; margin-bottom: 10px; pointer-events: none; }
+.card-front h4 { font-size: 0.95rem; color: var(--deep-purple); font-weight: 700; margin-bottom: 5px; line-height: 1.2; }
+.card-front .fav-price { font-size: 0.75rem; color: #666; }
+.card-front .fav-price strong { font-size: 1.1rem; color: var(--deep-purple); font-weight: 800; display: block; }
+
+/* VERSO */
+.card-back {
+    transform: rotateY(180deg); /* Já começa virado de costas */
+    border-color: var(--accent-orange); /* Borda laranja acesa */
+    padding: 20px 15px; text-align: center;
+    justify-content: center; align-items: center;
+    background: linear-gradient(145deg, #ffffff, #fffdfa);
+}
+.card-back h4 { color: var(--primary-purple); font-size: 1.1rem; margin-bottom: 10px;}
+.card-back p { font-size: 0.8rem; color: #666; margin-bottom: 20px; line-height: 1.4;}
+
+.btn-add-fav {
+    background: var(--accent-orange); color: white; border: none;
+    padding: 10px 15px; border-radius: 50px; font-weight: 700; cursor: pointer;
+    width: 100%; transition: 0.3s; font-size: 0.9rem;
+}
+.btn-add-fav:hover { transform: scale(1.05); background: #e66400; }
+/* ------------------------------------- */
+
+.menu-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 50px; overflow-x: auto; padding-bottom: 10px; }
+.tab-btn {
+    padding: 10px 25px; border: 1px solid #e0e0e0; background: var(--white); border-radius: var(--radius-pill);
+    font-weight: 600; color: #777; cursor: pointer; transition: 0.3s; white-space: nowrap;
+}
+.tab-btn.active, .tab-btn:hover { 
+    background-color: var(--primary-purple); color: var(--white); border-color: var(--primary-purple);
+}
+
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; }
+
+/* CARD INVISÍVEL */
+.product-card {
+    background: transparent; border: none; box-shadow: none;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    position: relative; transition: transform 0.3s ease;
+}
+.product-card:hover { transform: translateY(-5px); }
+
+/* IMAGEM REDONDA */
+.product-img-container {
+    width: 100%; height: 240px; position: relative; overflow: hidden;
+    border-radius: var(--radius-card); /* 30px */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 15px; background: #fff;
+}
+.product-img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+.product-card:hover .product-img-container img { transform: scale(1.08); }
+
+.discount-badge {
+    position: absolute; top: 15px; left: 15px;
+    background: var(--accent-pink); color: white;
+    font-size: 0.75rem; font-weight: 800; padding: 6px 12px;
+    border-radius: 20px; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.product-info { width: 100%; padding: 0 5px; display: flex; flex-direction: column; flex: 1; }
+.product-info h3 { font-size: 1.2rem; font-weight: 700; color: var(--primary-purple); margin-bottom: 8px; }
+.description { 
+    font-size: 0.9rem; color: #666; margin-bottom: 20px; line-height: 1.5; min-height: 40px;
+}
+
+.card-bottom { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: auto; width: 100%; }
+.price { font-size: 1.3rem; font-weight: 800; color: var(--deep-purple); }
+
+/* Botão Pílula */
+.btn-pill {
+    width: 100%; padding: 12px 0; background: transparent; border: 1px solid #ddd;
+    border-radius: var(--radius-pill); color: var(--deep-purple); font-weight: 600; font-size: 0.95rem;
+    cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-pill:hover {
+    border-color: var(--primary-purple); color: var(--primary-purple);
+    background-color: rgba(74, 20, 140, 0.05);
+}
+
+/* =========================================
+   5. FOOTER
+   ========================================= */
+footer { 
+    background-color: var(--white); padding: 60px 5% 20px; margin-top: 80px; 
+    border-top: 1px solid #eee;
+}
+.footer-content { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px; }
+.footer-logo p { font-size: 0.9rem; opacity: 0.7; margin-top: 10px; max-width: 250px; }
+.developer-credit { margin-top: 20px; font-size: 0.8rem; color: #888; }
+.developer-credit a { color: var(--accent-pink); font-weight: 700; }
+.social-icons { display: flex; gap: 15px; }
+.social-icons a {
+    width: 40px; height: 40px; background: #f5f5f5; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; color: var(--deep-purple); transition: 0.3s;
+}
+.social-icons a:hover { background: var(--primary-purple); color: white; transform: translateY(-3px); }
+
+/* =========================================
+   6. BARRA FLUTUANTE (RESTORED ORIGINAL)
+   ========================================= */
+.cart-floating-bar {
+    position: fixed; 
+    bottom: 20px; 
+    left: 50%; 
+    transform: translateX(-50%) translateY(150%);
+    
+    /* O SEGREDO: Largura se adapta ao conteúdo */
+    width: auto;
+    width: max-content; /* Garante que abrace o conteúdo */
+    max-width: 90%;
+    
+    background: linear-gradient(to right, var(--action-green), #00b34a);
+    color: var(--white); 
+    padding: 10px 20px; /* Padding interno */
+    border-radius: 50px;
+    
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    gap: 0; /* ZERO GAP - O espaçamento será feito pelas margens do texto */
+    
+    box-shadow: 0 10px 30px rgba(0, 200, 83, 0.4);
+    cursor: pointer; 
+    z-index: 2000; 
+    
+    /* Animação suave para a largura da barra */
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cart-floating-bar.visible { 
+    transform: translateX(-50%) translateY(0); 
+}
+
+/* Lado Esquerdo (Sacola) */
+.cart-left { 
+    display: flex; 
+    align-items: center; 
+    position: relative;
+    flex-shrink: 0; /* Não deixa esmagar */
+}
+.cart-left i {
+    font-size: 1.4rem; 
+}
+
+.cart-left .badge-qty {
+    position: absolute; top: -8px; right: -10px; 
+    background-color: var(--white); color: var(--action-green);
+    font-size: 0.8rem; font-weight: 800; width: 20px; height: 20px; 
+    display: flex; align-items: center; justify-content: center; border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Texto do Meio (O culpado da salsicha) */
+.cart-center { 
+    font-weight: 700; 
+    font-size: 1rem;
+    white-space: nowrap; 
+    overflow: hidden;
+    
+    /* Estado VISÍVEL */
+    max-width: 200px; 
+    opacity: 1; 
+    margin: 0 15px; /* Espaço nas laterais */
+    
+    transition: all 0.5s ease;
+}
+
+/* Estado INVISÍVEL (Colapsado) */
+.cart-center.sumir {
+    max-width: 0; 
+    opacity: 0; 
+    margin: 0; /* Zera a margem para colar as pontas */
+}
+
+/* Lado Direito (Preço) */
+.cart-right { 
+    font-weight: 800; 
+    font-size: 1.1rem; 
+    flex-shrink: 0; /* Não deixa esmagar */
+    padding-left: 10px;
+    border-left: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Ajuste Fino para Mobile */
+@media (max-width: 480px) {
+    .cart-floating-bar {
+        bottom: 15px;
+        padding: 10px 15px;
+    }
+    .cart-center {
+        font-size: 0.9rem; /* Texto menor no mobile */
+    }
+    .cart-center.sumir {
+        margin: 0; /* Garante que zera no mobile tbm */
+    }
+}
+
+/* =========================================
+   7. MODAL (CHECKOUT)
+   ========================================= */
+.modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 3000; justify-content: center; align-items: center;
+}
+.modal-overlay.open { display: flex; }
+
+.modal-container {
+    background: white; width: 90%; max-width: 500px; padding: 30px;
+    border-radius: 25px; max-height: 90vh; overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.3s ease;
+}
+@keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.modal-header h3 { color: var(--primary-purple); font-size: 1.5rem; }
+.btn-close { background: #f0f0f0; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-size: 1.1rem; }
+
+.modal-body { overflow-y: auto; }
+.cart-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee; }
+.cart-summary { background: #f9f9f9; padding: 20px; border-radius: 15px; margin: 20px 0; }
+.summary-row.total { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 800; color: var(--primary-purple); }
+
+.input-group { position: relative; margin-bottom: 15px; }
+.input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #bbb; }
+.input-group input, .input-group select {
+    width: 100%; padding: 15px 15px 15px 45px; border: 2px solid #eee; border-radius: 12px; outline: none;
+}
+.input-group input:focus { border-color: var(--primary-purple); }
+
+.btn-finalizar-zap {
+    width: 100%; padding: 18px; background-color: var(--action-green); color: white;
+    border: none; border-radius: 15px; font-weight: 800; font-size: 1.1rem;
+    cursor: pointer; display: flex; justify-content: center; gap: 10px; transition: 0.3s;
+}
+.btn-finalizar-zap:hover { background-color: #00b34a; transform: translateY(-2px); }
+
+/* =========================================
+   8. RESPONSIVO (MOBILE MENU E CARDS)
+   ========================================= */
+.menu-toggle { display: none; cursor: pointer; flex-direction: column; justify-content: space-between; width: 30px; height: 22px; }
+.bar { width: 100%; height: 3px; background-color: #FFFFFF; border-radius: 4px; transition: 0.3s; }
+
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .menu-toggle { display: flex; }
+
+    .nav-links.active {
+        display: flex; position: fixed; top: 80px; left: 0; width: 100%; height: calc(100vh - 80px);
+        background: #4a0828; /* Fundo vinho premium da marca */
+        flex-direction: column; align-items: center; padding-top: 50px; gap: 40px;
+        z-index: 999;
+    }
+
+    /* Mágica da textura de frutinhas no fundo do menu mobile */
+    .nav-links.active::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: url('img/fruit-a.webp'); /* Puxando sua textura */
+        background-size: 350px;
+        background-repeat: repeat;
+        opacity: 0.05; /* Super clarinho pra não atrapalhar a leitura */
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    /* Letras brancas e maiores no menu mobile */
+    .nav-links.active li a { 
+        font-size: 1.8rem; 
+        color: #FFFFFF; 
+        font-weight: 900;
+    }
+
+    /* O X do botão hambúrguer fica amarelo ouro quando abre */
+    .menu-toggle.active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); background: #FFC107; }
+    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.active .bar:nth-child(3) { transform: translateY(-10px) rotate(-45deg); background: #FFC107; }
+
+    .hero-container { flex-direction: column; text-align: center; gap: 40px; }
+    .hero-text h1 { font-size: 2.8rem; }
+    .hero-btns { justify-content: center; }
+    .hero-img { 
+        display: none; 
+    }
+    
+    /* Ajustes para descer o conteúdo no celular sem aumentar o banner */
+    .hero-tiktok {
+        padding-top: 150px; /* Aumenta o espaço em cima (estava 120px) */
+        text-align: center; 
+    }
+
+    .hero-text-content {
+        margin-left: 0; /* Zera a margem no celular pra ficar centralizado direitinho */
+    }
+
+    .hero-text-content h1 {
+        margin-top: 0; /* Tira aquela margem negativa que puxava o texto pra cima */
+    }
+
+    .texto-amarelo { 
+        font-size: 3.5rem; 
+        -webkit-text-stroke: 1px #FFC107; /* Menos contorno no celular pra não empolar as letras */
+    }
+    .texto-branco { 
+        font-size: 1.2rem; 
+        -webkit-text-stroke: 0px; 
+    }
+
+    .hero-image-content {
+        margin-top: -20px; 
+        width: 100%;
+    }
+
+    .img-principal {
+        width: 100%; 
+        max-width: 400px;
+    }
+    
+    /* --- MÁGICA DA LISTA MOBILE (NOVO FORMATO IGUAL IFOOD) --- */
+    .menu-grid { 
+        grid-template-columns: 1fr; 
+        gap: 15px; /* Deixa os itens mais próximos na lista */
+    }
+
+    .product-card {
+        flex-direction: row; /* Coloca imagem e texto lado a lado */
+        align-items: stretch;
+        text-align: left;
+        padding: 15px;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        border: 1px solid #f0f0f0;
+    }
+
+    .product-img-container {
+        width: 100px; /* Transforma a foto num quadrado perfeito */
+        height: 100px;
+        border-radius: 15px;
+        margin-bottom: 0;
+        flex-shrink: 0; /* Impede que a foto amasse */
+        order: 2; /* Joga a foto para a DIREITA */
+        margin-left: 15px; /* Espaço entre o texto e a foto */
+    }
+
+    .product-info {
+        order: 1; /* Mantém o texto na ESQUERDA */
+        padding: 0;
+        justify-content: center;
+    }
+
+    .product-info h3 { font-size: 1.05rem; margin-bottom: 4px; line-height: 1.2; }
+    .description { 
+        font-size: 0.8rem; margin-bottom: 10px; min-height: auto; 
+        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; /* Corta o texto com 3 pontinhos */
+    }
+    
+    .card-bottom {
+        flex-direction: row; /* Alinha preço e botão horizontalmente */
+        justify-content: space-between;
+        margin-top: auto;
+    }
+
+    .price { font-size: 1rem; }
+    
+    .btn-pill {
+        width: auto; 
+        padding: 6px 12px; 
+        font-size: 0.8rem; /* Botão mais delicado */
+    }
+}
+
+/* =========================================
+   9. PRODUCT BUILDER (PERSONALIZAÇÃO)
+   ========================================= */
+
+/* Ajuste do Modal pra caber o Builder */
+.modal-builder {
+    max-width: 900px; /* Mais largo pra caber tudo */
+    height: 90vh;
+    display: flex; flex-direction: column;
+}
+
+.builder-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Metade Visual, Metade Opções */
+    gap: 30px;
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+
+/* --- LADO VISUAL --- */
+.builder-visual {
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+}
+
+/* Foto Real (Topo) */
+.foto-real-preview {
+    width: 100%; height: 180px;
+    border-radius: 20px; overflow: hidden; position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.foto-real-preview img { width: 100%; height: 100%; object-fit: cover; }
+.badge-builder {
+    position: absolute; top: 10px; left: 10px;
+    background: rgba(255,255,255,0.9); color: var(--primary-purple);
+    padding: 4px 10px; border-radius: 15px; font-size: 0.7rem; font-weight: 700;
+}
+
+/* O COPO MÁGICO (Área de Desenho) */
+.copo-magico-container {
+    width: 100%; display: flex; flex-direction: column; align-items: center;
+    background: #f4f4f4; border-radius: 20px; padding: 20px;
+}
+
+.copo-palco {
+    width: 200px; /* Largura do seu copo desenhado */
+    height: 250px; /* Altura do seu copo */
+    position: relative; /* O Pai é relativo */
+}
+
+/* As Camadas (Imagens Transparentes) */
+.camada {
+    position: absolute; /* Os filhos são absolutos (um em cima do outro) */
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+/* Ingredientes começam invisíveis */
+.camada.ingrediente {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px); /* Efeito de "cair" no copo */
+}
+
+/* Quando ativado pelo JS, fica visível */
+.camada.ingrediente.visivel {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.legenda-builder { font-size: 0.8rem; color: #999; margin-top: 10px; }
+
+
+/* --- LADO OPÇÕES --- */
+.builder-options h2 { color: var(--deep-purple); margin-bottom: 5px; }
+.builder-options p { color: #666; font-size: 0.9rem; margin-bottom: 20px; }
+
+.opcoes-lista { display: flex; flex-direction: column; gap: 10px; }
+
+/* Card de Opção (Checkbox Estilizado) */
+.opcao-card {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 15px; border: 2px solid #eee; border-radius: 15px;
+    cursor: pointer; transition: 0.2s; position: relative;
+}
+
+/* Esconde o checkbox feio original */
+.opcao-card input { display: none; }
+
+.opcao-info { display: flex; flex-direction: column; }
+.opcao-info .nome { font-weight: 700; color: var(--deep-purple); }
+.opcao-info .preco-add { font-size: 0.85rem; color: var(--accent-orange); }
+
+.check-icon { color: #ddd; font-size: 1.2rem; }
+
+/* Estilo QUANDO SELECIONADO */
+.opcao-card:has(input:checked) {
+    border-color: var(--primary-purple);
+    background-color: rgba(74, 20, 140, 0.05);
+}
+.opcao-card:has(input:checked) .check-icon {
+    color: var(--action-green);
+}
+
+/* Footer do Builder */
+.builder-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid #eee; padding-top: 20px; margin-top: auto;
+}
+.price-big { font-size: 1.5rem; color: var(--primary-purple); font-weight: 800; }
+
+/* RESPONSIVO (MOBILE) */
+@media (max-width: 768px) {
+    .builder-grid { grid-template-columns: 1fr; } /* Uma coluna só */
+    .copo-palco { width: 150px; height: 180px; } /* Copo menor no cel */
+    .foto-real-preview { height: 120px; }
+}
+
+/* Ícone de Coração Personalizado no Título */
+/* Ícone de Coração Personalizado no Título (Qualidade Alta) */
+.coracao-titulo {
+    width: 35px; /* Tamanho fixo maior para os detalhes do açaí aparecerem */
+    height: auto;
+    vertical-align: middle; 
+    transform: translateY(-3px); /* Ajuste fino para não desalinhar do texto */
+    display: inline-block;
+    margin-left: 8px; /* Dá um espacinho elegante entre a palavra "Sacola" e a imagem */
+    /* Opcional: Se a imagem estiver pixelando, isso ajuda o navegador a renderizar melhor */
+    image-rendering: -webkit-optimize-contrast; 
+}
+
+/* =========================================
+   SEÇÃO: COMO FUNCIONA (PASSOS)
+   ========================================= */
+.steps-section {
+    padding: 60px 5% 40px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
+.steps-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 30px; 
+    margin-top: 20px;
+}
+
+.step-card {
+    background: var(--white); 
+    padding: 40px 25px; 
+    border-radius: var(--radius-card); /* Mesma curva de 30px do resto */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+    text-align: center;
+    transition: 0.3s;
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+.step-card:hover { 
+    transform: translateY(-8px); 
+    box-shadow: 0 15px 35px rgba(74, 20, 140, 0.08); 
+}
+
+.step-icon {
+    width: 70px; height: 70px; 
+    background: rgba(74, 20, 140, 0.05); 
+    color: var(--primary-purple);
+    border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center; 
+    font-size: 1.8rem; 
+    margin: 0 auto 20px;
+    transition: 0.3s;
+}
+
+/* Quando passa o mouse no card, o ícone acende */
+.step-card:hover .step-icon {
+    background: var(--accent-orange);
+    color: var(--white);
+}
+
+.step-card h3 { 
+    color: var(--deep-purple); 
+    margin-bottom: 15px; 
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.step-card p { 
+    color: var(--text-muted); 
+    font-size: 0.95rem; 
+    line-height: 1.6; 
+}
+
+/* Ocultar produtos no filtro */
+.product-card.escondido {
+    display: none !important;
+}
+
+/* =========================================
+   BARRA DE PESQUISA EXPANSÍVEL (ELÁSTICA)
+   ========================================= */
+.search-container {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto 30px auto; /* Centraliza acima das abas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-input {
+    width: 55px; /* Começa como um círculo perfeito */
+    height: 55px;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    padding: 0;
+    background: var(--white);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--deep-purple);
+    outline: none;
+    /* A animação cúbica cria o efeito "bouncy" (vai e volta) */
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+/* O texto fantasma que aparece quando estica */
+.search-placeholder {
+    position: absolute;
+    left: 60px;
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.4s;
+    opacity: 0; /* Escondido no começo */
+}
+
+/* A lupa roxa no meio do círculo */
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    color: var(--primary-purple);
+    font-size: 1.3rem;
+    pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* --- O ESTADO "ATIVADO" (QUANDO CLICA) --- */
+.search-input:focus, 
+.search-input:not(:placeholder-shown) {
+    width: 100%; /* Estica pra ocupar tudo */
+    padding: 0 20px 0 60px; /* Dá espaço pra lupa na esquerda */
+    border-color: var(--accent-orange);
+    cursor: text;
+    box-shadow: 0 10px 30px rgba(255, 111, 0, 0.15); /* Brilho laranja */
+}
+
+/* Escorrega a lupa pra esquerda e pinta de laranja */
+.search-input:focus ~ .search-icon, 
+.search-input:not(:placeholder-shown) ~ .search-icon {
+    left: 30px; 
+    color: var(--accent-orange);
+}
+
+/* Mostra o texto só quando abre */
+.search-input:focus ~ .search-placeholder {
+    opacity: 1;
+}
+/* Esconde o texto assim que o cara digita a 1ª letra */
+.search-input:not(:placeholder-shown) ~ .search-placeholder {
+    opacity: 0;
+}
