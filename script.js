@@ -306,8 +306,7 @@ function enviarPedidoZap() {
     mensagem += `*💰 TOTAL: R$ ${total.toFixed(2).replace('.', ',')}*\n\n`;
     mensagem += `Aguardo a confirmação! 🚀`;
 
-    const url = `https://api.whatsapp.com/send?phone=${numeroLoja}&text=${encodeURIComponent(mensagem)}`;
-    window.open(url, '_blank');
+    const url = ``;
 }
 
 // Menu Mobile
@@ -498,4 +497,5 @@ document.addEventListener('DOMContentLoaded', () => {
             adicionarAoCarrinho(nome, preco);
         }
     };
+
 });
